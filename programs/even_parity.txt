@@ -1,0 +1,15 @@
+initial: S0
+tape: 1,0,1,0,0,1,0
+head: 0
+
+d(S0, 0) -> (Se, 0, r)
+d(S0, 1) -> (So, 1, r)
+d(S0, _) -> (S0, _, r)
+
+d(Se, 0) -> (Se, 0, r)
+d(Se, 1) -> (So, 1, r)
+d(Se, _) -> (ST, 1, r)
+
+d(So, 0) -> (So, 0, r)
+d(So, 1) -> (Se, 1, r)
+d(So, _) -> (ST, 1, r)
