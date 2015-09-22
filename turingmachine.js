@@ -1,8 +1,8 @@
 /*
-    _ denotes blank
-    Any other symbol can be used
+ _ denotes blank
+ Any other symbol can be used
 
-    ST is terminating state
+ ST is terminating state
  */
 
 (function () {
@@ -11,6 +11,8 @@
         this.tape = tape || [];
         this.state = state || 'S0';
         this.hpos = hpos || 0;
+
+        this.int = -1;
 
         this.rules = {};
     });
@@ -23,7 +25,7 @@
         this.tape[cell] = value;
     });
 
-    TuringMachine.prototype.moveHead = (function(dir) {
+    TuringMachine.prototype.moveHead = (function (dir) {
         if (dir == 'l') {
             this.hpos--;
         } else if (dir == 'r') {
@@ -41,10 +43,35 @@
         }
     });
 
-    TuringMachine.prototype.addRule = (function(state, input, new_state, output, movement) {
+    TuringMachine.prototype.addRule = (function (state, input, new_state, output, movement) {
         if (!this.rules[state]) this.rules[state] = {};
         this.rules[state][input] = [new_state, output, movement];
     });
+
+    TuringMachine.prototype.run = (function () {
+        while (this.step()) {
+        }
+    });
+
+    TuringMachine.prototype.step = (function () {
+        var input = this.tape[this.hpos];
+
+        if (!this.rules[this.state] || !this.rules[this.state][input]) {
+            clearInterval(this.int);
+            return false;
+        }
+
+        var r = this.rules[this.state][input];
+
+        this.state = r[0];
+        this.tape[this.hpos] = r[1];
+        this.moveHead(r[2]);
+
+        console.log(this.tape);
+
+        return true;
+    });
+
     window.TuringMachine = TuringMachine;
 })();
 
