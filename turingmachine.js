@@ -14,11 +14,27 @@
         this.tape[cell] = value;
     });
 
+    TuringMachine.prototype.moveHead = (function(dir) {
+        if (dir == 'l') {
+            this.hpos--;
+        } else if (dir == 'r') {
+            this.hpos++;
+        } else {
+            return false;
+        }
+
+        if (this.hpos < 0) {
+            this.tape.unshift('_');
+        }
+
+        if (this.hpos >= this.tape.length) {
+            this.tape.push('_');
+        }
+    });
+
     window.TuringMachine = TuringMachine;
 })();
 
 var elem = document.getElementById('tape');
 var tape = ['_', 1, 0, 1];
 var TM = new TuringMachine(elem, tape);
-
-
