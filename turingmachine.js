@@ -50,7 +50,7 @@
 
     TuringMachine.prototype.run = (function () {
         while (this.step()) {
-            this.sleep(1000);
+            //this.sleep(1000);
         }
     });
 
@@ -70,13 +70,34 @@
 
         console.log(this.tape);
 
+        this.drawTape();
+
         return true;
     });
 
     TuringMachine.prototype.sleep = (function (miliseconds) {
         var currentTime = new Date().getTime();
 
-        while (currentTime + miliseconds >= new Date().getTime()) {}
+        while (currentTime + miliseconds >= new Date().getTime()) {
+        }
+    });
+
+    TuringMachine.prototype.drawTape = (function () {
+        // Empty element
+        while (this.elem.hasChildNodes()) {
+            this.elem.removeChild(this.elem.lastChild);
+        }
+
+        // Add stuffs
+        for (var cell_ref in this.tape) {
+            var cell = this.tape[cell_ref];
+
+            var e = document.createElement('li');
+            if (cell_ref == this.hpos) e.className = 'head';
+            e.innerHTML = cell;
+            this.elem.appendChild(e);
+        }
+
     });
 
     window.TuringMachine = TuringMachine;
