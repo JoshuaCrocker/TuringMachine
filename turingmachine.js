@@ -15,10 +15,12 @@
         this.int = -1;
 
         this.rules = {};
+
+        this.drawTape();
     });
 
     TuringMachine.prototype.getCell = (function (cell) {
-        return this.tape[cell] || false;
+        return this.tape[cell];
     });
 
     TuringMachine.prototype.setCell = (function (cell, value) {
@@ -55,7 +57,7 @@
     });
 
     TuringMachine.prototype.step = (function () {
-        var input = this.tape[this.hpos];
+        var input = this.getCell(this.hpos);
 
         if (!this.rules[this.state] || !this.rules[this.state][input]) {
             clearInterval(this.int);
@@ -65,7 +67,7 @@
         var r = this.rules[this.state][input];
 
         this.state = r[0];
-        this.tape[this.hpos] = r[1];
+        this.setCell(this.hpos, r[1]);
         this.moveHead(r[2]);
 
         console.log(this.tape);
