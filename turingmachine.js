@@ -50,6 +50,7 @@
 
     TuringMachine.prototype.run = (function () {
         while (this.step()) {
+            this.sleep(1000);
         }
     });
 
@@ -70,6 +71,12 @@
         console.log(this.tape);
 
         return true;
+    });
+
+    TuringMachine.prototype.sleep = (function (miliseconds) {
+        var currentTime = new Date().getTime();
+
+        while (currentTime + miliseconds >= new Date().getTime()) {}
     });
 
     window.TuringMachine = TuringMachine;
