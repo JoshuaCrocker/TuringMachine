@@ -1,9 +1,18 @@
+/*
+    _ denotes blank
+    Any other symbol can be used
+
+    ST is terminating state
+ */
+
 (function () {
     var TuringMachine = (function (elem, tape, state, hpos) {
         this.elem = elem;
         this.tape = tape || [];
         this.state = state || 'S0';
         this.hpos = hpos || 0;
+
+        this.rules = {};
     });
 
     TuringMachine.prototype.getCell = (function (cell) {
@@ -32,9 +41,28 @@
         }
     });
 
+    TuringMachine.prototype.addRule = (function(state, input, new_state, output, movement) {
+        if (!this.rules[state]) this.rules[state] = {};
+        this.rules[state][input] = [new_state, output, movement];
+    });
     window.TuringMachine = TuringMachine;
 })();
 
 var elem = document.getElementById('tape');
-var tape = ['_', 1, 0, 1];
+var tape = [1, 0, 1];
 var TM = new TuringMachine(elem, tape);
+
+// EVEN PARITY
+TM.addRule('S0', 0, 'Se', 0, 'r');
+TM.addRule('S0', 1, 'So', 1, 'r');
+TM.addRule('S0', '_', 'S0', '_', 'r');
+
+TM.addRule('Se', 0, 'Se', 0, 'r');
+TM.addRule('Se', 1, 'So', 1, 'r');
+TM.addRule('Se', '_', 'ST', 0, 'r');
+
+TM.addRule('So', 0, 'So', 0, 'r');
+TM.addRule('So', 1, 'Se', 1, 'r');
+TM.addRule('So', '_', 'ST', 1, 'r');
+
+console.log(TM.rules);
