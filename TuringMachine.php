@@ -36,4 +36,57 @@ class TuringMachine {
 
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getTape() {
+        return $this->tape;
+    }
+
+    /**
+     * @param string $tape
+     */
+    public function setTape($tape) {
+        $this->tape = $tape;
+    }
+
+    /**
+     * @return string
+     */
+    public function getState() {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     * @return TuringMachine
+     */
+    public function setState($state) {
+        $this->state = $state;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHead() {
+        return $this->head;
+    }
+
+    /**
+     * @param int $head
+     * @return TuringMachine
+     */
+    public function setHead($head) {
+        $this->head = $head;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRules() {
+        return $this->rules;
+    }
 }

@@ -44,5 +44,13 @@ $TM = new TuringMachine((isset($_GET['prog']) ? $_GET['prog'] : null));
     </div>
 
     <script src="turingmachine.js"></script>
+    <script>
+        var elem = document.getElementById('tape');
+        var TM = new TuringMachine(elem, ["<?php print join('","', str_split($TM->getTape())); ?>"], "<?php print $TM->getState(); ?>", "<?php print $TM->getHead(); ?>");
+
+        <?php foreach ($TM->getRules() as $state => $rule) : foreach ($rule as $input => $data) : ?>
+        TM.addRule("<?php print $state; ?>", "<?php print $input; ?>", "<?php print $data[0]; ?>", "<?php print $data[1]; ?>", "<?php print $data[2]; ?>");
+        <?php endforeach; endforeach; ?>
+    </script>
 </body>
 </html>
