@@ -1,5 +1,5 @@
 state: S0
-tape: 1,0,1,0,0,1,0
+tape: 1010010
 head: 0
 
 d(S0, 0) -> (Se, 0, r)
