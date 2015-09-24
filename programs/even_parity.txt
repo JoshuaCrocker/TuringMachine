@@ -1,4 +1,4 @@
-initial: S0
+state: S0
 tape: 1,0,1,0,0,1,0
 head: 0
 
