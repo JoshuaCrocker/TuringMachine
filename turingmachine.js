@@ -17,6 +17,15 @@
         this.rules = {};
 
         this.drawTape();
+
+        this.$state = document.getElementById("state");
+        this.$head = document.getElementById("head");
+        this.$initial_tape = document.getElementById("initial_tape");
+        this.$program = document.getElementById("program");
+
+        this.$state.value = this.state;
+        this.$head.value = this.hpos;
+        this.$initial_tape.value = this.tape.join('');
     });
 
     TuringMachine.prototype.getCell = (function (cell) {
@@ -43,6 +52,8 @@
         if (this.hpos >= this.tape.length) {
             this.tape.push('_');
         }
+
+        this.$head.value = this.hpos;
     });
 
     TuringMachine.prototype.addRule = (function (state, input, new_state, output, movement) {
@@ -73,6 +84,8 @@
         console.log(this.tape);
 
         this.drawTape();
+
+        this.$state.value = this.state;
 
         return true;
     });

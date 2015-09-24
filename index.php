@@ -1,3 +1,7 @@
+<?php
+require 'TuringMachine.php';
+$TM = new TuringMachine((isset($_GET['prog']) ? $_GET['prog'] : null));
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -22,6 +26,20 @@
                                 $file; ?></a></li>
                 <?php endforeach; ?>
             </ul>
+        </section>
+
+        <section>
+            <form action="index.php?save" method="post">
+                <div>
+                    <input type="text" name="state" id="state" placeholder="State"/>
+                    <input type="text" name="initial_tape" id="initial_tape" placeholder="Initial Tape"/>
+                    <input type="text" name="head" id="head" placeholder="Head Pos."/>
+                </div>
+
+                <div>
+                    <textarea name="program" id="program"></textarea>
+                </div>
+            </form>
         </section>
     </div>
 
