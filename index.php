@@ -30,10 +30,48 @@ $TM = new TuringMachine((isset($_GET['prog']) ? $_GET['prog'] : null));
 
         <section>
             <form action="index.php?save" method="post">
+                <div class="description">
+                    <p>The turing machine is in state
+                        <input type="text" name="state" id="state" placeholder="State" class="paragraph"/>
+                        and the head is in position
+                        <input type="text" name="head" id="head" placeholder="Head Pos." class="paragraph"/>.
+                    </p>
+
+                    <p>The initial tape is:
+                        <input type="text" name="initial_tape" id="initial_tape" placeholder="Initial Tape" class="paragraph"/>
+                    </p>
+
+                </div>
+
                 <div>
-                    <input type="text" name="state" id="state" placeholder="State"/>
-                    <input type="text" name="initial_tape" id="initial_tape" placeholder="Initial Tape"/>
-                    <input type="text" name="head" id="head" placeholder="Head Pos."/>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="2">Initial</th>
+                            <th colspan="3">Next</th>
+                        </tr>
+
+                        <tr>
+                            <th>State</th>
+                            <th>Input</th>
+                            <th>State</th>
+                            <th>Output</th>
+                            <th>Movement</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php foreach ($TM->getRules() as $state => $rule) : foreach ($rule as $input => $data) : ?>
+                        <tr id="<?php print $state.'_'.$input; ?>">
+                            <td><?php print $state; ?></td>
+                            <td><?php print $input; ?></td>
+                            <td><?php print $data[0]; ?></td>
+                            <td><?php print $data[1]; ?></td>
+                            <td><?php print $data[2] == 'l' ? 'Left' : $data[2] == 'r' ? 'Right' : '-'; ?></td>
+                        </tr>
+                        <?php endforeach; endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div>

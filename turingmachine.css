@@ -22,3 +22,21 @@ body {
 .head {
     border-bottom: 3px solid red;
 }
+
+.description {
+    font-size: 14pt;
+}
+
+input.paragraph {
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px dotted #e3e3e3;
+
+    font-size: 14pt;
+    text-align: center;
+}
+
+tr.highlight {
+    background-color: yellow;
+}

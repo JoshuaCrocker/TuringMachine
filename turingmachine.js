@@ -63,11 +63,12 @@
 
     TuringMachine.prototype.run = (function () {
         while (this.step()) {
-            //this.sleep(1000);
+
         }
     });
 
     TuringMachine.prototype.step = (function () {
+        if (document.getElementsByClassName('highlight').length) document.getElementsByClassName('highlight')[0].className = '';
         var input = this.getCell(this.hpos);
 
         if (!this.rules[this.state] || !this.rules[this.state][input]) {
@@ -86,6 +87,8 @@
         this.drawTape();
 
         this.$state.value = this.state;
+
+        document.getElementById(this.state + '_' + input).className = 'highlight';
 
         return true;
     });
